@@ -1,3 +1,4 @@
 import { CostumerResolver } from './CostumerResolver';
+import { ProductResolver } from './ProductResolver';
 
-export default [CostumerResolver] as any;
+export default [CostumerResolver, ProductResolver] as any;
