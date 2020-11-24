@@ -16,7 +16,7 @@ export class Costumer extends BaseEntity {
   id: string;
 
   @Field(() => String)
-  @Column()
+  @Column({ type: 'varchar' })
   name: string;
 
   @Field(() => Date)
