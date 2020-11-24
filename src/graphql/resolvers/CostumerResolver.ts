@@ -7,12 +7,12 @@ import { CreateCostumerInput } from '../inputs/CreateCostumerInput';
 export class CostumerResolver {
   @Query(() => [Costumer])
   costumers() {
-    return Costumer.find();
+    return Costumer.find({ relations: ['orders'] });
   }
 
   @Query(() => Costumer)
   costumer(@Arg('id') id: string) {
-    return Costumer.findOne({ where: { id } });
+    return Costumer.findOne({ where: { id }, relations: ['orders'] });
   }
 
   @Mutation(() => Costumer)
