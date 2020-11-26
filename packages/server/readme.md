@@ -1,1 +1,0 @@
-interfacetype p base schema
