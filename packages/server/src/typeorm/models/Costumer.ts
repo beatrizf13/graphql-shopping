@@ -22,7 +22,7 @@ export class Costumer extends BaseEntity {
   name: string;
 
   @Field(() => [Order])
-  @OneToMany(() => Order, order => order.costumer)
+  @OneToMany(() => Order, (order) => order.costumer)
   orders: Order[];
 
   @Field(() => Date)

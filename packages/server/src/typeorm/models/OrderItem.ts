@@ -7,7 +7,9 @@ import {
   BaseEntity,
   ManyToOne,
 } from 'typeorm';
-import { ObjectType, Field, ID, Int, Float } from 'type-graphql';
+import {
+  ObjectType, Field, ID, Int, Float,
+} from 'type-graphql';
 import { Product } from './Product';
 import { Order } from './Order';
 

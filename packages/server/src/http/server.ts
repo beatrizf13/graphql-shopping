@@ -6,7 +6,7 @@ import { buildSchema } from 'type-graphql';
 
 import resolvers from '../graphql/resolvers';
 
-async function runServer() {
+async function runServer(): Promise<void> {
   await createConnection();
 
   const schema = await buildSchema({ resolvers, validate: false });

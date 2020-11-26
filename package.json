@@ -3,7 +3,8 @@
   "private": "true",
   "version": "1.0.0",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "typeorm": "tsnd --poll ./node_modules/typeorm/cli.js"
   },
   "workspaces": {
     "packages": [

@@ -8,7 +8,9 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { ObjectType, Field, ID, Float } from 'type-graphql';
+import {
+  ObjectType, Field, ID, Float,
+} from 'type-graphql';
 import { Costumer } from './Costumer';
 import { OrderItem } from './OrderItem';
 
@@ -24,7 +26,7 @@ export class Order extends BaseEntity {
   costumer: Costumer;
 
   @Field(() => [OrderItem])
-  @OneToMany(() => OrderItem, item => item.order, { eager: true })
+  @OneToMany(() => OrderItem, (item) => item.order, { eager: true })
   items: OrderItem[];
 
   @Field(() => Float)

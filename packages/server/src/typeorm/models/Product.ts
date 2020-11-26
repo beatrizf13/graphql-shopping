@@ -6,7 +6,9 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
 } from 'typeorm';
-import { ObjectType, Field, ID, Float, Int } from 'type-graphql';
+import {
+  ObjectType, Field, ID, Float, Int,
+} from 'type-graphql';
 
 @ObjectType()
 @Entity('products')
@@ -25,7 +27,7 @@ export class Product extends BaseEntity {
 
   @Field(() => String)
   @Column({ type: 'varchar' })
-  image_url: string;
+  imageUrl: string;
 
   @Field(() => Float)
   @Column({ type: 'float' })

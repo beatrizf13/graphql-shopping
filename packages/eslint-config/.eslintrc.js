@@ -19,6 +19,9 @@ module.exports = {
   },
   plugins: ['import', 'react', 'react-hooks', '@typescript-eslint'],
   rules: {
+    'camelcase': 'off',
+    'max-classes-per-file': 'off',
+    'class-methods-use-this': 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
     'react/prop-types': 'off',

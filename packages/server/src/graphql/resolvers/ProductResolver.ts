@@ -1,4 +1,6 @@
-import { Resolver, Query, Mutation, Arg } from 'type-graphql';
+import {
+  Resolver, Query, Mutation, Arg,
+} from 'type-graphql';
 import { Product } from '../../typeorm/models/Product';
 
 import { CreateProductInput } from '../inputs/CreateProductInput';

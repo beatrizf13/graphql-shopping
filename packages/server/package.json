@@ -5,8 +5,7 @@
   "author": "Beatriz Felix <mbeatrizmfelix@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev:server": "tsnd --poll --transpile-only --ignore-watch node_modules --no-notify src/http/server.ts",
-    "dev:typeorm": "tsnd --poll ./node_modules/typeorm/cli.js",
+    "dev:server": "tsnd --poll --transpile-only --no-notify src/http/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored"
   },
   "dependencies": {

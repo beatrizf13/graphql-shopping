@@ -1,4 +1,6 @@
-import { InputType, Field, Int, ID } from 'type-graphql';
+import {
+  InputType, Field, Int, ID,
+} from 'type-graphql';
 
 @InputType()
 class Item {

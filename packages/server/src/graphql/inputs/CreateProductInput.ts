@@ -1,4 +1,6 @@
-import { InputType, Field, Int, Float } from 'type-graphql';
+import {
+  InputType, Field, Int, Float,
+} from 'type-graphql';
 
 @InputType()
 export class CreateProductInput {
@@ -9,7 +11,7 @@ export class CreateProductInput {
   description: string;
 
   @Field(() => String)
-  image_url: string;
+  imageUrl: string;
 
   @Field(() => Float)
   price: number;
