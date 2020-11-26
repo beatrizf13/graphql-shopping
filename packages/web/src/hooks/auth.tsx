@@ -13,10 +13,6 @@ interface ICostumer {
   name: string;
 }
 
-interface IAuthState {
-  costumer: ICostumer;
-}
-
 interface IAuthContext {
   costumer: ICostumer;
   signIn(credentials: ICredentials): Promise<void>;
@@ -26,14 +22,14 @@ interface IAuthContext {
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<IAuthState>(() => {
-    const costumer = localStorage.getItem('@shopping:costumer');
+  const [costumer, setCostumer] = useState<ICostumer>(() => {
+    const storedCostumer = localStorage.getItem('@shopping:costumer');
 
-    if (costumer) {
-      return { costumer: JSON.parse(costumer) };
+    if (storedCostumer) {
+      return JSON.parse(storedCostumer);
     }
 
-    return {} as IAuthState;
+    return {} as ICostumer;
   });
 
   const [createCostumer, { data: response }] = useMutation(CREATE_COSTUMER);
@@ -42,28 +38,33 @@ export const AuthProvider: React.FC = ({ children }) => {
     async ({ name }) => {
       await createCostumer({ variables: { name } });
 
-      const costumer = response.createCostumer;
+      const createdCostumer = response.createCostumer;
 
       if (!costumer) return;
 
       localStorage.setItem('@shopping:costumer', JSON.stringify(costumer));
 
-      setData({ costumer });
+      setCostumer(createdCostumer);
     },
-    [createCostumer, response],
+    [costumer, createCostumer, response],
   );
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@shopping:costumer');
 
-    setData({} as IAuthState);
+    setCostumer({} as ICostumer);
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ costumer: data.costumer, signIn, signOut }}>
-      {children}
-    </AuthContext.Provider>
+  const value = React.useMemo(
+    () => ({
+      costumer,
+      signIn,
+      signOut,
+    }),
+    [costumer, signIn, signOut],
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export function useAuth(): IAuthContext {
