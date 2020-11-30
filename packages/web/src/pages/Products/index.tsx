@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { FiPlus } from 'react-icons/fi';
 
@@ -23,9 +23,9 @@ const Products: React.FC = () => {
 
   const { products } = useStock();
 
-  function handleAddToCart(product: IProduct): void {
+  const handleAddToCart = useCallback((product: IProduct) => {
     addToCart(product);
-  }
+  }, [addToCart]);
 
   return (
     <Container>

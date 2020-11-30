@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FiPlus, FiMinus, FiTrash } from 'react-icons/fi';
 
 import { Link } from 'react-router-dom';
@@ -30,6 +30,20 @@ const Cart: React.FC = () => {
   const {
     increment, decrement, products, totalValue, totalItens,
   } = useCart();
+
+  const handleIncrement = useCallback(
+    (productId: string) => {
+      increment(productId);
+    },
+    [increment],
+  );
+
+  const handleDecrement = useCallback(
+    (productId: string) => {
+      decrement(productId);
+    },
+    [decrement],
+  );
 
   if (products.length < 1) {
     return (
@@ -66,10 +80,10 @@ const Cart: React.FC = () => {
             </ProductTitleContainer>
 
             <ActionContainer>
-              <ActionButton onClick={() => increment(product.id)}>
+              <ActionButton onClick={() => handleIncrement(product.id)}>
                 <FiPlus size={20} color="#636363" />
               </ActionButton>
-              <ActionButton onClick={() => decrement(product.id)}>
+              <ActionButton onClick={() => handleDecrement(product.id)}>
                 {product.quantity <= 1 ? (
                   <FiTrash size={20} color="#636363" />
                 ) : (

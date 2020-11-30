@@ -3,7 +3,6 @@ import React, {
   useState,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
 } from 'react';
 import { formatValue } from '../utils/formatValue';
@@ -21,58 +20,52 @@ interface ICartContext {
 const CartContext = createContext<ICartContext | null>(null);
 
 const CartProvider: React.FC = ({ children }) => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<IProduct[]>(() => {
+    const storedProducts = localStorage.getItem('@shopping:cart');
 
-  useEffect(() => {
-    async function loadProducts(): Promise<void> {
-      const storedProducts = localStorage.getItem('@shopping:cart');
-
-      if (storedProducts) {
-        setProducts([...JSON.parse(storedProducts)]);
-      }
+    if (storedProducts) {
+      return [...JSON.parse(storedProducts)];
     }
 
-    loadProducts();
-  }, []);
+    return [];
+  });
 
-  const saveProducts = useCallback(async (): Promise<void> => {
+  const saveProducts = useCallback((): void => {
     localStorage.setItem('@shopping:cart', JSON.stringify(products));
   }, [products]);
 
   const increment = useCallback(
-    async (id: string) => {
-      const product = products.find((p) => p.id === id);
+    (id: string) => {
+      const newProducts = [...products];
+      const index = newProducts.findIndex((product) => product.id === id);
+      newProducts[index].quantity += 1;
 
-      if (product) {
-        setProducts([
-          ...products,
-          { ...product, quantity: product.quantity + 1 },
-        ]);
+      setProducts(newProducts);
 
-        await saveProducts();
-      }
+      saveProducts();
     },
     [products, saveProducts],
   );
 
   const decrement = useCallback(
-    async (id: string) => {
-      const product = products.find((p) => p.id === id);
+    (id: string) => {
+      let newProducts = [...products];
+      const index = newProducts.findIndex((product) => product.id === id);
 
-      if (product) {
-        setProducts([
-          ...products,
-          { ...product, quantity: product.quantity - 1 },
-        ]);
-
-        await saveProducts();
+      if (newProducts[index].quantity === 1) {
+        newProducts = newProducts.filter((product) => product.id !== id);
+      } else {
+        newProducts[index].quantity -= 1;
       }
+
+      setProducts(newProducts);
+      saveProducts();
     },
     [products, saveProducts],
   );
 
   const addToCart = useCallback(
-    async (product: IProduct) => {
+    (product: IProduct) => {
       const productExists = products.find((p) => p.id === product.id);
 
       if (productExists) {
@@ -81,7 +74,7 @@ const CartProvider: React.FC = ({ children }) => {
         setProducts([...products, { ...product, quantity: 1 }]);
       }
 
-      await saveProducts();
+      saveProducts();
     },
     [increment, products, saveProducts],
   );
@@ -114,14 +107,7 @@ const CartProvider: React.FC = ({ children }) => {
       totalValue,
       totalItens,
     }),
-    [
-      addToCart,
-      increment,
-      decrement,
-      products,
-      totalValue,
-      totalItens,
-    ],
+    [addToCart, increment, decrement, products, totalValue, totalItens],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

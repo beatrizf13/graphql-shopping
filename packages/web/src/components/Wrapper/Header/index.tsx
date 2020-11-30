@@ -11,7 +11,7 @@ import {
   HeaderLink,
 } from './styles';
 
-import { useCart } from '../../hooks/cart';
+import { useCart } from '../../../hooks/cart';
 
 const Header: React.FC = () => {
   const { totalValue, totalItens } = useCart();
