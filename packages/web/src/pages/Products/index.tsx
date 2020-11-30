@@ -4,8 +4,6 @@ import { FiPlus } from 'react-icons/fi';
 
 import { useCart } from '../../hooks/cart';
 
-import FloatingCart from '../../components/FloatingCart';
-
 import { formatValue } from '../../utils/formatValue';
 
 import {
@@ -30,26 +28,22 @@ const Products: React.FC = () => {
   }
 
   return (
-    <>
-      <FloatingCart />
-      <Container>
-
-        <ProductList>
-          {products?.map((product) => (
-            <Product key={product.id}>
-              <ProductImage src={product.imageUrl} />
-              <ProductTitle>{product.name}</ProductTitle>
-              <PriceContainer>
-                <ProductPrice>{formatValue(product.price)}</ProductPrice>
-                <ProductButton onClick={() => handleAddToCart(product)}>
-                  <FiPlus size={20} color="#C4C4C4" />
-                </ProductButton>
-              </PriceContainer>
-            </Product>
-          ))}
-        </ProductList>
-      </Container>
-    </>
+    <Container>
+      <ProductList>
+        {products?.map((product) => (
+          <Product key={product.id}>
+            <ProductImage src={product.imageUrl} />
+            <ProductTitle>{product.name}</ProductTitle>
+            <PriceContainer>
+              <ProductPrice>{formatValue(product.price)}</ProductPrice>
+              <ProductButton onClick={() => handleAddToCart(product)}>
+                <FiPlus size={20} color="#C4C4C4" />
+              </ProductButton>
+            </PriceContainer>
+          </Product>
+        ))}
+      </ProductList>
+    </Container>
   );
 };
 

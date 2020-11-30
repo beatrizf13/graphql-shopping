@@ -4,6 +4,7 @@ import {
   Route as ReactDOMRoute,
   Redirect,
 } from 'react-router-dom';
+import Wrapper from '../components/Wrapper';
 
 import { useAuth } from '../hooks/auth';
 
@@ -23,11 +24,13 @@ const Route: React.FC<ReactProps> = ({
     <ReactDOMRoute
       {...rest}
       render={({ location }) => (isPrivate === !!costumer ? (
-        <Component />
+        <Wrapper>
+          <Component />
+        </Wrapper>
       ) : (
         <Redirect
           to={{
-            pathname: isPrivate ? '/' : '/products',
+            pathname: isPrivate ? '/' : '/produtos',
             state: { from: location },
           }}
         />

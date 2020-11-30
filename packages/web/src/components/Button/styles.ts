@@ -3,8 +3,8 @@ import { shade } from 'polished';
 
 export const Container = styled.button`
   background: #0083ca;
-  height: 56px;
-  border-radius: 10px;
+  height: 46px;
+  border-radius: 4px;
   border: 0;
   padding: 0 16px;
   color: #fff;

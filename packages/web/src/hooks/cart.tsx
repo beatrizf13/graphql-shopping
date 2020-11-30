@@ -4,7 +4,9 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
 } from 'react';
+import { formatValue } from '../utils/formatValue';
 import { IProduct } from './stock';
 
 interface ICartContext {
@@ -12,6 +14,8 @@ interface ICartContext {
   addToCart(product: Omit<IProduct, 'quantity'>): void;
   increment(product_id: string): void;
   decrement(product_id: string): void;
+  totalItens: number;
+  totalValue: string;
 }
 
 const CartContext = createContext<ICartContext | null>(null);
@@ -82,14 +86,42 @@ const CartProvider: React.FC = ({ children }) => {
     [increment, products, saveProducts],
   );
 
+  const totalValue = useMemo(() => {
+    const total = products.reduce((accumulator, product) => {
+      const productTotal = product.price * product.quantity;
+
+      return accumulator + productTotal;
+    }, 0);
+
+    return formatValue(total);
+  }, [products]);
+
+  const totalItens = useMemo(() => {
+    const total = products.reduce(
+      (accumulator: number, product: IProduct) => accumulator + product.quantity,
+      0,
+    );
+
+    return total;
+  }, [products]);
+
   const value = React.useMemo(
     () => ({
       addToCart,
       increment,
       decrement,
       products,
+      totalValue,
+      totalItens,
     }),
-    [products, addToCart, increment, decrement],
+    [
+      addToCart,
+      increment,
+      decrement,
+      products,
+      totalValue,
+      totalItens,
+    ],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -23,7 +23,7 @@ export const Product = styled.div`
 
   background: #fff;
   padding: 16px 16px;
-  border-radius: 5px;
+  border-radius: 4px;
   margin: 8px;
 
   &:hover {

@@ -2,16 +2,15 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-
+  justify-content: space-between;
   position: sticky;
   top: 0;
+  padding: 20px;
 
   background: #0083ca;
   width: 100%;
   height: 8%;
-  padding: 0 20px;
   z-index: 100;
 
   span {
@@ -20,13 +19,38 @@ export const Container = styled.div`
     font-size: 16px;
   }
 
-  @media screen and (max-width: 646px) {
-    justify-content: center;
+  @media screen and (max-width: 488px) {
+    flex-direction: column;
   }
 `;
 
+export const HeaderLinks = styled.ul`
+  display: flex;
+  padding-top: 10px;
+`;
+
+export const HeaderLink = styled.li`
+  list-style: none;
+  padding: 0 6px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      border-bottom: 1px solid #fff;
+    }
+  }
+`;
+
+export const Cart = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
 export const CartPricing = styled.div`
-  padding: 20px;
+  padding: 0 20px;
 `;
 
 export const CartButton = styled.div`
@@ -34,7 +58,7 @@ export const CartButton = styled.div`
   justify-content: space-between;
   text-decoration: none;
   align-items: center;
-  padding: 10px;
+  padding: 0 10px;
 
   span {
     margin-left: 15px;
