@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "typeorm": "tsnd --poll ./node_modules/typeorm/cli.js"
+    "typeorm": "tsnd --poll ./node_modules/typeorm/cli.js",
+    "web": "yarn workspace @shopping/web",
+    "server": "yarn workspace @shopping/server"
   },
   "workspaces": {
     "packages": [
@@ -12,11 +14,13 @@
     ]
   },
   "license": "MIT",
+  "dependencies": {
+    "graphql": "^15.4.0"
+  },
   "devDependencies": {
     "@shopping/eslint-config": "*",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-
     "jest": "^26.6.3",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2"

@@ -5,14 +5,13 @@
   "author": "Beatriz Felix <mbeatrizmfelix@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev:server": "tsnd --poll --transpile-only --no-notify src/http/server.ts",
+    "dev": "tsnd --poll --transpile-only --no-notify src/http/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored"
   },
   "dependencies": {
     "apollo-server": "^2.19.0",
     "class-validator": "^0.12.2",
     "dotenv": "^8.2.0",
-    "graphql": "^15.4.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
