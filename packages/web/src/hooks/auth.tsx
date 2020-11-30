@@ -14,7 +14,7 @@ interface ICostumer {
 }
 
 interface IAuthContext {
-  costumer: ICostumer;
+  costumer: ICostumer | undefined;
   signIn(credentials: ICredentials): Promise<void>;
   signOut(): void;
 }
@@ -29,7 +29,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       return JSON.parse(storedCostumer);
     }
 
-    return {} as ICostumer;
+    return undefined;
   });
 
   const [createCostumer, { data: response }] = useMutation(CREATE_COSTUMER);
@@ -40,13 +40,13 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       const createdCostumer = response.createCostumer;
 
-      if (!costumer) return;
+      if (!createdCostumer) return;
 
-      localStorage.setItem('@shopping:costumer', JSON.stringify(costumer));
+      localStorage.setItem('@shopping:costumer', JSON.stringify(createdCostumer));
 
       setCostumer(createdCostumer);
     },
-    [costumer, createCostumer, response],
+    [createCostumer, response],
   );
 
   const signOut = useCallback(() => {

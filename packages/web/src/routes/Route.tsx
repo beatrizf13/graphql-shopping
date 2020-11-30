@@ -20,13 +20,17 @@ const Route: React.FC<ReactProps> = ({
 }) => {
   const { costumer } = useAuth();
 
+  const Page: React.FC = () => (isPrivate ? (
+    <Wrapper>
+      <Component />
+    </Wrapper>
+  ) : <Component />);
+
   return (
     <ReactDOMRoute
       {...rest}
       render={({ location }) => (isPrivate === !!costumer ? (
-        <Wrapper>
-          <Component />
-        </Wrapper>
+        <Page />
       ) : (
         <Redirect
           to={{
