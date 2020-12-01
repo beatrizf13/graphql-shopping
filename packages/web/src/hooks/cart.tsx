@@ -37,7 +37,7 @@ const CartProvider: React.FC = ({ children }) => {
   const increment = useCallback(
     (id: string) => {
       const newProducts = [...products];
-      const index = newProducts.findIndex((product) => product.id === id);
+      const index = newProducts.findIndex(product => product.id === id);
       newProducts[index].quantity += 1;
 
       setProducts(newProducts);
@@ -50,10 +50,10 @@ const CartProvider: React.FC = ({ children }) => {
   const decrement = useCallback(
     (id: string) => {
       let newProducts = [...products];
-      const index = newProducts.findIndex((product) => product.id === id);
+      const index = newProducts.findIndex(product => product.id === id);
 
       if (newProducts[index].quantity === 1) {
-        newProducts = newProducts.filter((product) => product.id !== id);
+        newProducts = newProducts.filter(product => product.id !== id);
       } else {
         newProducts[index].quantity -= 1;
       }
@@ -66,7 +66,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   const addToCart = useCallback(
     (product: IProduct) => {
-      const productExists = products.find((p) => p.id === product.id);
+      const productExists = products.find(p => p.id === product.id);
 
       if (productExists) {
         increment(productExists.id);
@@ -91,7 +91,8 @@ const CartProvider: React.FC = ({ children }) => {
 
   const totalItens = useMemo(() => {
     const total = products.reduce(
-      (accumulator: number, product: IProduct) => accumulator + product.quantity,
+      (accumulator: number, product: IProduct) =>
+        accumulator + product.quantity,
       0,
     );
 

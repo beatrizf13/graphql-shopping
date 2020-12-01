@@ -23,14 +23,17 @@ const Products: React.FC = () => {
 
   const { products } = useStock();
 
-  const handleAddToCart = useCallback((product: IProduct) => {
-    addToCart(product);
-  }, [addToCart]);
+  const handleAddToCart = useCallback(
+    (product: IProduct) => {
+      addToCart(product);
+    },
+    [addToCart],
+  );
 
   return (
     <Container>
       <ProductList>
-        {products?.map((product) => (
+        {products?.map(product => (
           <Product key={product.id}>
             <ProductImage src={product.imageUrl} />
             <ProductTitle>{product.name}</ProductTitle>

@@ -27,9 +27,7 @@ import { formatValue } from '../../utils/formatValue';
 import Button from '../../components/Button';
 
 const Cart: React.FC = () => {
-  const {
-    increment, decrement, products, totalValue, totalItens,
-  } = useCart();
+  const { increment, decrement, products, totalValue, totalItens } = useCart();
 
   const handleIncrement = useCallback(
     (productId: string) => {
@@ -59,8 +57,8 @@ const Cart: React.FC = () => {
   return (
     <Container>
       <ProductList>
-        {products.map((product) => (
-          <Product>
+        {products.map(product => (
+          <Product key={product.id}>
             <ProductImage src={product.imageUrl} />
             <ProductTitleContainer>
               <ProductTitle>{product.name}</ProductTitle>

@@ -1,10 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-} from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import { GET_PRODUCTS } from '../graphql/stock';
 
 export interface IProduct {
@@ -33,12 +28,11 @@ export const StockProvider: React.FC = ({ children }) => {
     }
   }, [loading, response]);
 
-  const value = React.useMemo(
-    () => ({ products }),
-    [products],
-  );
+  const value = React.useMemo(() => ({ products }), [products]);
 
-  return <StockContext.Provider value={value}>{children}</StockContext.Provider>;
+  return (
+    <StockContext.Provider value={value}>{children}</StockContext.Provider>
+  );
 };
 
 export function useStock(): IStockContext {

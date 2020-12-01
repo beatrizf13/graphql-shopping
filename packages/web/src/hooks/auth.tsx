@@ -1,6 +1,4 @@
-import React, {
-  createContext, useCallback, useState, useContext,
-} from 'react';
+import React, { createContext, useCallback, useState, useContext } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_COSTUMER } from '../graphql/costumer';
 
@@ -42,7 +40,10 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       if (!createdCostumer) return;
 
-      localStorage.setItem('@shopping:costumer', JSON.stringify(createdCostumer));
+      localStorage.setItem(
+        '@shopping:costumer',
+        JSON.stringify(createdCostumer),
+      );
 
       setCostumer(createdCostumer);
     },
