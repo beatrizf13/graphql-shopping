@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'dotenv/config';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';

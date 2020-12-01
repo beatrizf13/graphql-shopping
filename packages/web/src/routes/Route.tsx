@@ -20,25 +20,30 @@ const Route: React.FC<ReactProps> = ({
 }) => {
   const { costumer } = useAuth();
 
-  const Page: React.FC = () => (isPrivate ? (
-    <Wrapper>
+  const Page: React.FC = () =>
+    isPrivate ? (
+      <Wrapper>
+        <Component />
+      </Wrapper>
+    ) : (
       <Component />
-    </Wrapper>
-  ) : <Component />);
+    );
 
   return (
     <ReactDOMRoute
       {...rest}
-      render={({ location }) => (isPrivate === !!costumer ? (
-        <Page />
-      ) : (
-        <Redirect
-          to={{
-            pathname: isPrivate ? '/' : '/produtos',
-            state: { from: location },
-          }}
-        />
-      ))}
+      render={({ location }) =>
+        isPrivate === !!costumer ? (
+          <Page />
+        ) : (
+          <Redirect
+            to={{
+              pathname: isPrivate ? '/' : '/produtos',
+              state: { from: location },
+            }}
+          />
+        )
+      }
     />
   );
 };

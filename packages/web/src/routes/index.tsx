@@ -6,11 +6,13 @@ import Route from './Route';
 import SignIn from '../pages/SignIn';
 import Products from '../pages/Products';
 import Cart from '../pages/Cart';
+import ProductDetails from '../pages/ProductDetails';
 
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={SignIn} />
     <Route path="/produtos" component={Products} isPrivate />
+    <Route path="/produto/:id" component={ProductDetails} isPrivate />
     <Route path="/carrinho" component={Cart} isPrivate />
     <Route path="*" component={() => <Redirect to="/" />} />
   </Switch>

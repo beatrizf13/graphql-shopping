@@ -12,6 +12,7 @@ export interface IProduct {
 }
 
 interface IStockContext {
+  loading: boolean;
   products: IProduct[];
 }
 
@@ -28,7 +29,10 @@ export const StockProvider: React.FC = ({ children }) => {
     }
   }, [loading, response]);
 
-  const value = React.useMemo(() => ({ products }), [products]);
+  const value = React.useMemo(() => ({ products, loading }), [
+    loading,
+    products,
+  ]);
 
   return (
     <StockContext.Provider value={value}>{children}</StockContext.Provider>

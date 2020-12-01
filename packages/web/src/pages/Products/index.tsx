@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 
 import { FiPlus } from 'react-icons/fi';
 
+import { Link } from 'react-router-dom';
 import { useCart } from '../../hooks/cart';
 
 import { formatValue } from '../../utils/formatValue';
@@ -17,11 +18,24 @@ import {
   ProductButton,
 } from './styles';
 import { IProduct, useStock } from '../../hooks/stock';
+import Loading from '../../components/Loading';
 
 const Products: React.FC = () => {
+  const [productsToShow, setProductsToShow] = useState<IProduct[]>([]);
+
   const { addToCart } = useCart();
 
-  const { products } = useStock();
+  const { products, loading } = useStock();
+
+  useEffect(() => {
+    if (!loading) {
+      const filteredProducts = products.filter(
+        product => product.quantity >= 1,
+      );
+
+      setProductsToShow(filteredProducts);
+    }
+  }, [loading, products]);
 
   const handleAddToCart = useCallback(
     (product: IProduct) => {
@@ -30,10 +44,12 @@ const Products: React.FC = () => {
     [addToCart],
   );
 
+  if (loading) return <Loading />;
+
   return (
     <Container>
       <ProductList>
-        {products?.map(product => (
+        {productsToShow?.map(product => (
           <Product key={product.id}>
             <ProductImage src={product.imageUrl} />
             <ProductTitle>{product.name}</ProductTitle>
@@ -43,6 +59,7 @@ const Products: React.FC = () => {
                 <FiPlus size={20} color="#C4C4C4" />
               </ProductButton>
             </PriceContainer>
+            <Link to={`/produto/${product.id}`}>Detalhes</Link>
           </Product>
         ))}
       </ProductList>

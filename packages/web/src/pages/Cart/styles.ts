@@ -48,6 +48,8 @@ export const Product = styled.div`
 `;
 
 export const ProductImage = styled.img`
+  object-fit: contain;
+  align-self: center;
   height: 92px;
   width: 92px;
 `;

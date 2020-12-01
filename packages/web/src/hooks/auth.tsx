@@ -20,7 +20,7 @@ interface IAuthContext {
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [costumer, setCostumer] = useState<ICostumer>(() => {
+  const [costumer, setCostumer] = useState<ICostumer | undefined>(() => {
     const storedCostumer = localStorage.getItem('@shopping:costumer');
 
     if (storedCostumer) {
@@ -52,8 +52,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@shopping:costumer');
+    localStorage.removeItem('@shopping:cart');
 
-    setCostumer({} as ICostumer);
+    setCostumer(undefined);
   }, []);
 
   const value = React.useMemo(

@@ -26,6 +26,14 @@ export const Product = styled.div`
   border-radius: 4px;
   margin: 8px;
 
+  a {
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 18px;
+    color: #2583ca;
+  }
+
   &:hover {
     box-shadow: rgb(0 0 0 / 15%) 0px 0px 20px;
   }
