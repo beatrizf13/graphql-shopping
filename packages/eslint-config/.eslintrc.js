@@ -2,24 +2,29 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    jest: true
+    jest: true,
   },
   extends: [
+    'airbnb',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'airbnb'
+    'prettier',
+    'prettier/react',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  plugins: ['import', 'react', 'react-hooks', '@typescript-eslint'],
+  plugins: ['import', 'react', 'react-hooks', '@typescript-eslint', 'prettier'],
   rules: {
-    'camelcase': 'off',
+    'prettier/prettier': 'error',
+    'no-empty-function': 'off',
+    'no-useless-constructor': 'off',
+    camelcase: 'off',
     'max-classes-per-file': 'off',
     'class-methods-use-this': 'off',
     'no-use-before-define': 'off',
@@ -34,21 +39,21 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': [
       'error',
       {
-        allowExpressions: true
-      }
+        allowExpressions: true,
+      },
     ],
     'import/extensions': [
       'error',
       'ignorePackages',
       {
         ts: 'never',
-        tsx: 'never'
-      }
-    ]
+        tsx: 'never',
+      },
+    ],
   },
   settings: {
     'import/resolver': {
-      typescript: {}
+      typescript: {},
     },
-  }
+  },
 };
