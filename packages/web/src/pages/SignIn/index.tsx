@@ -38,7 +38,7 @@ const SignIn: React.FC = () => {
 
         await signIn({ name: data.name });
 
-        history.push('/products');
+        history.push('/produtos');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);

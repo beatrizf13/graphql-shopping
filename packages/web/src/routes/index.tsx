@@ -7,6 +7,7 @@ import SignIn from '../pages/SignIn';
 import Products from '../pages/Products';
 import Cart from '../pages/Cart';
 import ProductDetails from '../pages/ProductDetails';
+import Checkout from '../pages/Checkout';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -14,6 +15,7 @@ const Routes: React.FC = () => (
     <Route path="/produtos" component={Products} isPrivate />
     <Route path="/produto/:id" component={ProductDetails} isPrivate />
     <Route path="/carrinho" component={Cart} isPrivate />
+    <Route path="/pagamento" component={Checkout} isPrivate />
     <Route path="*" component={() => <Redirect to="/" />} />
   </Switch>
 );

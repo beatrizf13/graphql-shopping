@@ -4,6 +4,7 @@ export const Container = styled.div`
   height: 100vh;
   display: flex;
   align-items: stretch;
+  padding: 0.5rem;
 `;
 
 export const Content = styled.div`

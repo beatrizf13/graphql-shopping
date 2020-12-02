@@ -18,13 +18,13 @@ import {
   ActionButton,
   Checkout,
   CheckoutTotal,
-  EmptyCart,
 } from './styles';
 
 import { useCart } from '../../hooks/cart';
 import { formatValue } from '../../utils/formatValue';
 
 import Button from '../../components/Button';
+import EmptyCart from '../../components/EmptyCart';
 
 const Cart: React.FC = () => {
   const { increment, decrement, products, totalValue, totalItens } = useCart();
@@ -44,14 +44,7 @@ const Cart: React.FC = () => {
   );
 
   if (products.length < 1) {
-    return (
-      <Container>
-        <EmptyCart>
-          <h2>Seu carrinho está vazio!</h2>
-          <Link to="/products">Navegar entre os produtos</Link>
-        </EmptyCart>
-      </Container>
-    );
+    return <EmptyCart />;
   }
 
   return (
@@ -99,8 +92,8 @@ const Cart: React.FC = () => {
           <span>{totalValue}</span>
         </CheckoutTotal>
 
-        <Link to="/checkout">
-          <Button>Finalizar compra</Button>
+        <Link to="/pagamento">
+          <Button>Continuar</Button>
         </Link>
       </Checkout>
     </Container>

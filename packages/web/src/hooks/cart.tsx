@@ -35,7 +35,7 @@ const CartProvider: React.FC = ({ children }) => {
   }, [products]);
 
   const increment = useCallback(
-    (id: string) => {
+    (id: string): void => {
       const newProducts = [...products];
       const index = newProducts.findIndex(product => product.id === id);
       newProducts[index].quantity += 1;
@@ -48,7 +48,7 @@ const CartProvider: React.FC = ({ children }) => {
   );
 
   const decrement = useCallback(
-    (id: string) => {
+    (id: string): void => {
       let newProducts = [...products];
       const index = newProducts.findIndex(product => product.id === id);
 
@@ -65,7 +65,7 @@ const CartProvider: React.FC = ({ children }) => {
   );
 
   const addToCart = useCallback(
-    (product: IProduct) => {
+    (product: IProduct): void => {
       const productExists = products.find(p => p.id === product.id);
 
       if (productExists) {

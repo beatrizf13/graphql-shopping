@@ -33,7 +33,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [createCostumer, { data: response }] = useMutation(CREATE_COSTUMER);
 
   const signIn = useCallback(
-    async ({ name }) => {
+    async ({ name }): Promise<void> => {
       await createCostumer({ variables: { name } });
 
       const createdCostumer = response.createCostumer;
@@ -50,7 +50,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     [createCostumer, response],
   );
 
-  const signOut = useCallback(() => {
+  const signOut = useCallback((): void => {
     localStorage.removeItem('@shopping:costumer');
     localStorage.removeItem('@shopping:cart');
 

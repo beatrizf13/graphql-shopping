@@ -4,12 +4,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-`;
-
-export const EmptyCart = styled.div`
-  text-align: center;
-  margin-top: 2rem;
+  justify-content: center;
+  padding: 0.5rem;
 `;
 
 export const Checkout = styled.div`
