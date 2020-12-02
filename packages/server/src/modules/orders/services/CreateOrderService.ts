@@ -12,6 +12,7 @@ interface IItem {
 
 interface IRequest {
   costumerId: string;
+  creditCard: string;
   items: IItem[];
 }
 
@@ -28,7 +29,15 @@ class CreateOrderService {
     private ordersRepository: IOrdersRepository,
   ) {}
 
-  public async execute({ costumerId, items }: IRequest): Promise<Order> {
+  public async execute({
+    costumerId,
+    items,
+    creditCard,
+  }: IRequest): Promise<Order> {
+    if (creditCard !== '1111111111111111') {
+      throw new Error('payment denied');
+    }
+
     if (items.length <= 0) {
       throw new Error('order is not allowed without products');
     }

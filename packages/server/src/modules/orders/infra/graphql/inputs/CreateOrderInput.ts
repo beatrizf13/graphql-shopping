@@ -14,6 +14,9 @@ export class CreateOrderInput {
   @Field(() => ID)
   costumerId: string;
 
+  @Field(() => String)
+  creditCard: string;
+
   @Field(() => [Item])
   items: Item[];
 }
