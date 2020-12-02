@@ -17,6 +17,10 @@ export const Product = styled.div`
   padding: 16px 10px;
   border-radius: 4px;
   margin: 4px;
+
+  @media screen and (max-width: 712px) {
+    flex-direction: column;
+  }
 `;
 
 export const ProductImage = styled.img`
@@ -31,7 +35,7 @@ export const ProductInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 14px;
+  margin-left: 32px;
   font-size: 16px;
 
   button {
@@ -49,6 +53,11 @@ export const ProductInfoContainer = styled.div`
     &:hover {
       background: ${shade(0.2, '#58c22e')};
     }
+  }
+
+  @media screen and (max-width: 712px) {
+    margin-left: 0;
+    margin-top: 32px;
   }
 `;
 

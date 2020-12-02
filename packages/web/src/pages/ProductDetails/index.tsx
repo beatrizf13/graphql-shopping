@@ -58,7 +58,9 @@ const ProductDetails: React.FC = () => {
 
         <ProductInfoContainer>
           <ProductTitle>{product.name}</ProductTitle>
-          <ProductQuantity>{`${product.quantity} items em estoque`}</ProductQuantity>
+          <ProductQuantity>{`${product.quantity} ite${
+            product.quantity > 1 ? 'ns' : 'm'
+          } em estoque`}</ProductQuantity>
           <ProductDescription>{product.description}</ProductDescription>
           <ProductPrice>{formatValue(product.price)}</ProductPrice>
           <Button onClick={() => handleAddToCart(product)}>
