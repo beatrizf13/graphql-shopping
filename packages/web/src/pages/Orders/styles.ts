@@ -26,16 +26,12 @@ export const Order = styled.div`
     margin-bottom: 12px;
     font-weight: bold;
   }
-
-  span {
-    font-size: 16px;
-  }
 `;
 
 export const OrderItem = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 8px 0;
+  margin: 4px 0;
 `;
 export const ProductInfo = styled.span``;
 

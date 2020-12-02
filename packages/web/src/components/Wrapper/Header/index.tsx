@@ -47,7 +47,7 @@ const Header: React.FC = () => {
           <Link to="/carrinho">
             <CartButton>
               <FiShoppingCart size={24} color="#fff" />
-              <span>{`${totalItens} itens`}</span>
+              <span>{`${totalItens} ite${totalItens > 1 ? 'ns' : 'm'}`}</span>
             </CartButton>
           </Link>
         </Cart>

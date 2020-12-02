@@ -1,5 +1,6 @@
 import React from 'react';
 import Loading from '../../components/Loading';
+import Title from '../../components/Title';
 import { useOrder } from '../../hooks/order';
 import { formatDate } from '../../utils/formatDate';
 import { formatValue } from '../../utils/formatValue';
@@ -21,7 +22,7 @@ const Orders: React.FC = () => {
 
   return (
     <Container>
-      <h2>Minhas compras</h2>
+      <Title>Minhas compras</Title>
       {orders?.map(order => (
         <Order key={order.id}>
           <h3>Compra de {formatDate(new Date(order.createdAt))}</h3>
@@ -30,14 +31,14 @@ const Orders: React.FC = () => {
               <ProductInfo>{`${item.quantity}x ${item.product.name}`}</ProductInfo>
 
               <ProductTotal>
-                Total {formatValue(item.price * item.quantity)}
+                {formatValue(item.price * item.quantity)}
               </ProductTotal>
             </OrderItem>
           ))}
 
           <hr />
 
-          <OrderTotal>{formatValue(order.totalPrice)}</OrderTotal>
+          <OrderTotal>Total {formatValue(order.totalPrice)}</OrderTotal>
         </Order>
       ))}
     </Container>

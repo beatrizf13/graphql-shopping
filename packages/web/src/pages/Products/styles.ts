@@ -30,7 +30,6 @@ export const Product = styled.div`
   a {
     text-decoration: none;
     text-align: center;
-    font-size: 14px;
     margin-top: 18px;
     color: #2583ca;
   }
@@ -50,7 +49,6 @@ export const ProductImage = styled.img`
 `;
 
 export const ProductTitle = styled.h3`
-  font-size: 16px;
   line-height: 18px;
 `;
 
@@ -60,7 +58,6 @@ export const PriceContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  font-size: 16px;
   font-weight: bold;
 
   padding-top: 10px;
@@ -69,7 +66,7 @@ export const PriceContainer = styled.div`
 
 export const ProductPrice = styled.span`
   font-weight: bold;
-  font-size: 16px;
+
   color: #0083ca;
 `;
 

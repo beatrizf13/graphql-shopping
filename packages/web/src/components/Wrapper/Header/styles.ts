@@ -16,7 +16,6 @@ export const Container = styled.div`
   span {
     color: #fff;
     font-weight: bold;
-    font-size: 16px;
   }
 
   @media screen and (max-width: 512px) {

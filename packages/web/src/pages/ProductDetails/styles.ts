@@ -1,4 +1,3 @@
-import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -36,22 +35,15 @@ export const ProductInfoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-left: 32px;
-  font-size: 16px;
 
   button {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 36px;
     max-width: 260px;
-    background: #58c22e;
 
     svg {
       margin-right: 4px;
-    }
-
-    &:hover {
-      background: ${shade(0.2, '#58c22e')};
     }
   }
 
@@ -62,12 +54,11 @@ export const ProductInfoContainer = styled.div`
 `;
 
 export const ProductTitle = styled.h2`
-  font-size: 28px;
+  font-size: 22px;
   font-weight: bold;
 `;
 
 export const ProductDescription = styled.p`
-  font-size: 14px;
   padding: 12px 0;
 `;
 
@@ -78,6 +69,6 @@ export const ProductQuantity = styled.p`
 
 export const ProductPrice = styled.p`
   font-weight: bold;
-  font-size: 26px;
+  font-size: 22px;
   color: #0083ca;
 `;

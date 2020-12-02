@@ -1,19 +1,19 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_ORDER = gql`
-  mutation($costumerId: ID!, $items: [Item!]!) {
-    createOrder(data: { costumerId: $costumerId, items: $items }) {
-      id
-      costumer {
-        name
-      }
+  mutation($costumerId: ID!, $items: [Item!]!, $creditCard: String!) {
+    createOrder(
+      data: { costumerId: $costumerId, creditCard: $creditCard, items: $items }
+    ) {
       items {
+        id
         product {
           name
         }
         quantity
         price
       }
+      createdAt
       totalPrice
     }
   }

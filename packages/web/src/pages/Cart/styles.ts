@@ -20,8 +20,6 @@ export const CheckoutTotal = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-  font-size: 16px;
-
   span {
     margin-left: 2px;
     font-weight: bold;
@@ -55,12 +53,9 @@ export const ProductTitleContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-left: 14px;
-  font-size: 16px;
 `;
 
-export const ProductTitle = styled.h3`
-  font-size: 16px;
-`;
+export const ProductTitle = styled.h3``;
 
 export const ProductPriceContainer = styled.div``;
 
@@ -80,7 +75,6 @@ export const ProductPrice = styled.span`
   font-weight: bold;
   margin-top: 5px;
 
-  font-size: 16px;
   color: #0083ca;
 `;
 

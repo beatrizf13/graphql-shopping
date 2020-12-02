@@ -25,6 +25,7 @@ import { formatValue } from '../../utils/formatValue';
 
 import Button from '../../components/Button';
 import EmptyCart from '../../components/EmptyCart';
+import Title from '../../components/Title';
 
 const Cart: React.FC = () => {
   const { increment, decrement, products, totalValue, totalItens } = useCart();
@@ -49,6 +50,7 @@ const Cart: React.FC = () => {
 
   return (
     <Container>
+      <Title>Carrinho</Title>
       <ProductList>
         {products.map(product => (
           <Product key={product.id}>

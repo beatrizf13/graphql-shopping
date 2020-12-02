@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -26,6 +26,7 @@ import {
 import { useOrder, ICreateOrderItem } from '../../hooks/order';
 import { useAuth } from '../../hooks/auth';
 import getValidationErrors from '../../utils/ getValidationErrors';
+import Alert from '../../components/Alert';
 
 interface IFormData {
   number: string;
@@ -39,9 +40,10 @@ const Checkout: React.FC = () => {
 
   const history = useHistory();
 
+  const [message, setMessage] = useState('');
   const { costumer } = useAuth();
   const { products, totalValue, totalItens } = useCart();
-  const { createOrder } = useOrder();
+  const { createOrder, addOrderToView } = useOrder();
 
   const orderItems: ICreateOrderItem[] = products.map(product => ({
     productId: product.id,
@@ -51,24 +53,28 @@ const Checkout: React.FC = () => {
   const handleSubmit = useCallback(
     async (data: IFormData) => {
       try {
+        setMessage('');
+
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          number: Yup.string().required('Número é obrigatório').max(16),
+          number: Yup.string().required('Número é obrigatório').length(16),
           titularName: Yup.string().required('Nome do títular é obrigatório'),
           validity: Yup.string().required('Validade é obrigatória').max(7),
           securityCode: Yup.string()
             .required('Cód. de segurança é obrigatório')
-            .max(3),
+            .length(3),
         });
 
         await schema.validate(data, { abortEarly: false });
 
-        await createOrder({
+        const order = await createOrder({
           costumerId: costumer?.id as string,
           creditCard: data.number,
           items: orderItems,
         });
+
+        addOrderToView(order);
 
         history.push('/compras');
       } catch (err) {
@@ -76,9 +82,11 @@ const Checkout: React.FC = () => {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
         }
+
+        setMessage('Pagamento negado!');
       }
     },
-    [costumer, createOrder, orderItems],
+    [costumer?.id, createOrder, history, orderItems, addOrderToView],
   );
 
   if (products.length < 1) {
@@ -145,6 +153,7 @@ const Checkout: React.FC = () => {
             <Button type="submit">Finalizar compra</Button>
           </Form>
         </PaymentInfo>
+        {message && <Alert message={message} />}
       </CompletionContainer>
     </Container>
   );

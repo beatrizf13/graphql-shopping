@@ -40,6 +40,7 @@ interface IOrderContext {
   loading: boolean;
   orders: IOrder[];
   createOrder(data: ICreateOrder): Promise<IOrder>;
+  addOrderToView(order: IOrder): void;
 }
 
 const OrderContext = createContext<IOrderContext>({} as IOrderContext);
@@ -67,18 +68,25 @@ export const OrderProvider: React.FC = ({ children }) => {
 
       const order = response.data.createOrder;
 
+      localStorage.removeItem('@shopping:cart');
+
       return order;
     },
     [createOrderRequest],
   );
+
+  const addOrderToView = useCallback((order: IOrder) => {
+    setOrders(oldOrders => [...oldOrders, order]);
+  }, []);
 
   const value = React.useMemo(
     () => ({
       loading,
       orders,
       createOrder,
+      addOrderToView,
     }),
-    [createOrder, loading, orders],
+    [createOrder, loading, orders, addOrderToView],
   );
 
   return (

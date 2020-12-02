@@ -20,10 +20,6 @@ export const ProductsList = styled.div`
   hr {
     margin: 12px 0;
   }
-
-  span {
-    font-size: 16px;
-  }
 `;
 
 export const Product = styled.div`
@@ -33,7 +29,7 @@ export const Product = styled.div`
 `;
 
 export const CardTitle = styled.h2`
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   color: #2583ca;
   margin-bottom: 12px;
