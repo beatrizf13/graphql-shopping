@@ -32,6 +32,7 @@ export const GET_ORDERS = gql`
         price
       }
       createdAt
+      totalPrice
     }
   }
 `;

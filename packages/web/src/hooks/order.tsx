@@ -9,6 +9,7 @@ import { useMutation, useQuery } from '@apollo/client';
 
 import { GET_ORDERS, CREATE_ORDER } from '../graphql/order';
 import { IProduct } from './stock';
+import { useAuth } from './auth';
 
 export interface ICreateOrderItem {
   productId: string;
@@ -29,11 +30,14 @@ interface IOrderItem {
 }
 
 export interface IOrder {
+  id: string;
   items: IOrderItem[];
+  totalPrice: number;
   createdAt: Date;
 }
 
 interface IOrderContext {
+  loading: boolean;
   orders: IOrder[];
   createOrder(data: ICreateOrder): Promise<IOrder>;
 }
@@ -45,11 +49,15 @@ export const OrderProvider: React.FC = ({ children }) => {
 
   const [createOrderRequest] = useMutation(CREATE_ORDER);
 
-  const { loading, data: getOrdersResponse } = useQuery(GET_ORDERS);
+  const { costumer } = useAuth();
+
+  const { loading, data: getOrdersResponse } = useQuery(GET_ORDERS, {
+    variables: { costumerId: costumer?.id },
+  });
 
   useEffect(() => {
     if (!loading) {
-      setOrders(getOrdersResponse?.orders);
+      setOrders(getOrdersResponse?.ordersByCostumer);
     }
   }, [loading, getOrdersResponse]);
 
@@ -66,10 +74,11 @@ export const OrderProvider: React.FC = ({ children }) => {
 
   const value = React.useMemo(
     () => ({
+      loading,
       orders,
       createOrder,
     }),
-    [createOrder, orders],
+    [createOrder, loading, orders],
   );
 
   return (
