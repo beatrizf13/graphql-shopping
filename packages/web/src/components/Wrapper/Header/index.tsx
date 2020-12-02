@@ -12,9 +12,13 @@ import {
 } from './styles';
 
 import { useCart } from '../../../hooks/cart';
+import { useAuth } from '../../../hooks/auth';
 
 const Header: React.FC = () => {
+  const { signOut } = useAuth();
   const { totalValue, totalItens } = useCart();
+
+  const handleSignOut = (): void => signOut();
 
   return (
     <Container>
@@ -25,6 +29,12 @@ const Header: React.FC = () => {
 
         <HeaderLink>
           <Link to="/produtos">Produtos</Link>
+        </HeaderLink>
+
+        <HeaderLink>
+          <button type="button" onClick={handleSignOut}>
+            Sair
+          </button>
         </HeaderLink>
       </HeaderLinks>
 

@@ -6,11 +6,11 @@ export const Container = styled.div`
   justify-content: space-between;
   position: sticky;
   top: 0;
-  padding: 20px;
+  padding: 10px;
 
   background: #0083ca;
   width: 100%;
-  height: 8%;
+  height: 10%;
   z-index: 100;
 
   span {
@@ -19,14 +19,17 @@ export const Container = styled.div`
     font-size: 16px;
   }
 
-  @media screen and (max-width: 488px) {
+  @media screen and (max-width: 512px) {
     flex-direction: column;
   }
 `;
 
 export const HeaderLinks = styled.ul`
   display: flex;
-  padding-top: 10px;
+
+  @media screen and (max-width: 512px) {
+    margin-bottom: 12px;
+  }
 `;
 
 export const HeaderLink = styled.li`
@@ -34,8 +37,18 @@ export const HeaderLink = styled.li`
   padding: 0 6px;
 
   a {
-    color: #fff;
     text-decoration: none;
+  }
+
+  button {
+    background: none;
+    border: none;
+  }
+
+  a,
+  button {
+    color: #fff;
+    border-bottom: 1px solid #0083ca;
 
     &:hover {
       border-bottom: 1px solid #fff;
