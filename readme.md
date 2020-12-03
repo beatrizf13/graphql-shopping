@@ -1,10 +1,10 @@
 # Shopping
 
-Aplicação fullstack que simula um carrinho de compras utilizando GraphQl.
+Aplicação fullstack que simula um carrinho de compras utilizando GraphQl com Apollo e TypeORM.
 
 ### Instruções de inicialização
 
-#### Instala as dependências:
+#### Instale as dependências:
 
 ```bash
 yarn
@@ -21,7 +21,7 @@ Playground GraphQL: [http://localhost:3333](http://localhost:3333)
 #### Inicie o cliente web:
 
 ```bash
-yarn web start
+yarn web dev
 ```
 
 Cliente web: [http://localhost:3000](http://localhost:3000)
