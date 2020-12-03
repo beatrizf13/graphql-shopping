@@ -29,7 +29,7 @@ const Products: React.FC = () => {
 
   useEffect(() => {
     if (!loading) {
-      const filteredProducts = products.filter(
+      const filteredProducts = products?.filter(
         product => product.quantity >= 1,
       );
 

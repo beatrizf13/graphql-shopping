@@ -50,6 +50,7 @@ const ProductDetails: React.FC = () => {
   );
 
   if (loading) return <Loading />;
+
   if (!product)
     return (
       <Container>

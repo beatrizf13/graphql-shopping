@@ -6,13 +6,13 @@ import React, {
   useMemo,
 } from 'react';
 import { formatValue } from '../utils/formatValue';
-import { IProduct } from './stock';
+import { IProduct, useStock } from './stock';
 
 interface ICartContext {
   products: IProduct[];
   addToCart(product: Omit<IProduct, 'quantity'>): void;
-  increment(product_id: string): void;
-  decrement(product_id: string): void;
+  increment(productId: string): void;
+  decrement(productId: string): void;
   totalItens: number;
   totalValue: string;
 }
@@ -30,38 +30,44 @@ const CartProvider: React.FC = ({ children }) => {
     return [];
   });
 
-  const saveProducts = useCallback((): void => {
+  const { hasQuantityOnStock } = useStock();
+
+  const updateCartOnStorage = useCallback((): void => {
     localStorage.setItem('@shopping:cart', JSON.stringify(products));
   }, [products]);
 
   const increment = useCallback(
-    (id: string): void => {
-      const newProducts = [...products];
-      const index = newProducts.findIndex(product => product.id === id);
-      newProducts[index].quantity += 1;
+    (productId: string): void => {
+      const index = products.findIndex(product => product.id === productId);
+      const newQuantity = products[index].quantity + 1;
 
-      setProducts(newProducts);
+      if (hasQuantityOnStock({ productId, quantity: newQuantity })) {
+        const newProducts = [...products];
 
-      saveProducts();
+        newProducts[index].quantity = newQuantity;
+
+        setProducts(newProducts);
+        updateCartOnStorage();
+      }
     },
-    [products, saveProducts],
+    [hasQuantityOnStock, products, updateCartOnStorage],
   );
 
   const decrement = useCallback(
-    (id: string): void => {
+    (productId: string): void => {
+      const index = products.findIndex(product => product.id === productId);
       let newProducts = [...products];
-      const index = newProducts.findIndex(product => product.id === id);
 
       if (newProducts[index].quantity === 1) {
-        newProducts = newProducts.filter(product => product.id !== id);
+        newProducts = newProducts.filter(product => product.id !== productId);
       } else {
         newProducts[index].quantity -= 1;
       }
 
       setProducts(newProducts);
-      saveProducts();
+      updateCartOnStorage();
     },
-    [products, saveProducts],
+    [products, updateCartOnStorage],
   );
 
   const addToCart = useCallback(
@@ -74,9 +80,9 @@ const CartProvider: React.FC = ({ children }) => {
         setProducts([...products, { ...product, quantity: 1 }]);
       }
 
-      saveProducts();
+      updateCartOnStorage();
     },
-    [increment, products, saveProducts],
+    [increment, products, updateCartOnStorage],
   );
 
   const totalValue = useMemo(() => {
