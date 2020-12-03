@@ -11,4 +11,8 @@ export const Container = styled.div`
 export const EmptyCartInfo = styled.div`
   text-align: center;
   margin-top: 2rem;
+
+  a {
+    margin-top: 4px;
+  }
 `;

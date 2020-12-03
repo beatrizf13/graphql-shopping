@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   background: #0083ca;
   width: 100%;
-  height: 10%;
+  height: 40px;
   z-index: 100;
 
   span {
@@ -19,6 +19,7 @@ export const Container = styled.div`
   }
 
   @media screen and (max-width: 512px) {
+    height: 72px;
     flex-direction: column;
   }
 `;

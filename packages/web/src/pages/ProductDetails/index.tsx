@@ -19,6 +19,7 @@ import Loading from '../../components/Loading';
 import { formatValue } from '../../utils/formatValue';
 import Button from '../../components/Button';
 import { useCart } from '../../hooks/cart';
+import Title from '../../components/Title';
 
 interface IProductDetailsParams {
   id: string;
@@ -49,7 +50,12 @@ const ProductDetails: React.FC = () => {
   );
 
   if (loading) return <Loading />;
-  if (!product) return <h1>Produto não encontrado</h1>;
+  if (!product)
+    return (
+      <Container>
+        <Title>Produto não encontrado</Title>
+      </Container>
+    );
 
   return (
     <Container>
