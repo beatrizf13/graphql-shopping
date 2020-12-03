@@ -26,7 +26,7 @@ const SignIn: React.FC = () => {
   const { signIn } = useAuth();
 
   const handleSubmit = useCallback(
-    async (data: IFormData) => {
+    async (data: IFormData): Promise<void> => {
       try {
         formRef.current?.setErrors({});
 

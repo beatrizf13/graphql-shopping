@@ -30,11 +30,11 @@ export const AuthProvider: React.FC = ({ children }) => {
     return undefined;
   });
 
-  const [createCostumer, { data: response }] = useMutation(CREATE_COSTUMER);
+  const [createCostumer] = useMutation(CREATE_COSTUMER);
 
   const signIn = useCallback(
-    async ({ name }): Promise<void> => {
-      await createCostumer({ variables: { name } });
+    async ({ name }: ICredentials): Promise<void> => {
+      const { data: response } = await createCostumer({ variables: { name } });
 
       const createdCostumer = response.createCostumer;
 
@@ -47,7 +47,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       setCostumer(createdCostumer);
     },
-    [createCostumer, response],
+    [createCostumer],
   );
 
   const signOut = useCallback((): void => {
