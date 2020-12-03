@@ -89,7 +89,14 @@ const Checkout: React.FC = () => {
         setMessage('Pagamento negado!');
       }
     },
-    [costumer?.id, createOrder, history, orderItems, addOrderToView],
+    [
+      createOrder,
+      costumer,
+      orderItems,
+      addOrderToView,
+      updateProducts,
+      history,
+    ],
   );
 
   if (products.length < 1) {
