@@ -10,7 +10,6 @@
   "dependencies": {
     "apollo-server": "^2.19.0",
     "class-validator": "^0.12.2",
-    "dotenv": "^8.2.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.4.0",

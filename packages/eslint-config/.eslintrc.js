@@ -22,6 +22,9 @@ module.exports = {
   plugins: ['import', 'react', 'react-hooks', '@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    'import/no-extraneous-dependencies': 0,
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'no-empty-function': 'off',
     'no-useless-constructor': 'off',

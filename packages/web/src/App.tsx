@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
@@ -9,6 +8,8 @@ import GlobalStyle from './styles/global';
 
 import Routes from './routes';
 import { apolloClient } from './services/apolloClient';
+
+dotenv.config();
 
 const App: React.FC = () => (
   <>

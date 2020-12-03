@@ -15,14 +15,19 @@
   },
   "license": "MIT",
   "dependencies": {
-    "graphql": "^15.4.0"
+    "dotenv": "^8.2.0",
+    "graphql": "^15.4.0",
+    "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
-    "@shopping/eslint-config": "*",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "jest": "^26.6.3",
+    "lerna": "^3.22.1",
     "ts-jest": "^26.4.4",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.0-beta"
+  },
+  "peerDependencies": {
+    "@shopping/eslint-config": "*"
   }
 }
