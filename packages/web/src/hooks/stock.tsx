@@ -27,12 +27,13 @@ interface IStockContext {
   loading: boolean;
   products: IProduct[];
   hasQuantityOnStock(options: IHasQuantityOnStock): boolean;
+  updateProducts(): Promise<void>;
 }
 
 const StockContext = createContext<IStockContext | null>(null);
 
 export const StockProvider: React.FC = ({ children }) => {
-  const { loading, data: response } = useQuery(GET_PRODUCTS);
+  const { loading, data: response, refetch } = useQuery(GET_PRODUCTS);
 
   const [products, setProducts] = useState<IProduct[]>([]);
 
@@ -53,9 +54,14 @@ export const StockProvider: React.FC = ({ children }) => {
     [products],
   );
 
+  const updateProducts = useCallback(async () => {
+    const { data } = await refetch();
+    setProducts(data?.products);
+  }, [refetch]);
+
   const value = React.useMemo(
-    () => ({ products, loading, hasQuantityOnStock }),
-    [loading, products, hasQuantityOnStock],
+    () => ({ products, loading, hasQuantityOnStock, updateProducts }),
+    [loading, products, hasQuantityOnStock, updateProducts],
   );
 
   return (

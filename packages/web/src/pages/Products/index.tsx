@@ -16,26 +16,15 @@ import {
   PriceContainer,
   ProductPrice,
   ProductButton,
+  ProductQuantity,
 } from './styles';
 import { IProduct, useStock } from '../../hooks/stock';
 import Loading from '../../components/Loading';
 
 const Products: React.FC = () => {
-  const [productsToShow, setProductsToShow] = useState<IProduct[]>([]);
-
   const { addToCart } = useCart();
 
   const { products, loading } = useStock();
-
-  useEffect(() => {
-    if (!loading) {
-      const filteredProducts = products?.filter(
-        product => product.quantity >= 1,
-      );
-
-      setProductsToShow(filteredProducts);
-    }
-  }, [loading, products]);
 
   const handleAddToCart = useCallback(
     (product: IProduct) => {
@@ -49,10 +38,19 @@ const Products: React.FC = () => {
   return (
     <Container>
       <ProductList>
-        {productsToShow?.map(product => (
-          <Product key={product.id}>
+        {products?.map(product => (
+          <Product opacity={product.quantity <= 0} key={product.id}>
             <ProductImage src={product.imageUrl} />
             <ProductTitle>{product.name}</ProductTitle>
+
+            {product.quantity > 0 ? (
+              <ProductQuantity>{`${product.quantity} ite${
+                product.quantity > 1 ? 'ns' : 'm'
+              } em estoque`}</ProductQuantity>
+            ) : (
+              <ProductQuantity>Fora de estoque</ProductQuantity>
+            )}
+
             <PriceContainer>
               <ProductPrice>{formatValue(product.price)}</ProductPrice>
               <ProductButton onClick={() => handleAddToCart(product)}>

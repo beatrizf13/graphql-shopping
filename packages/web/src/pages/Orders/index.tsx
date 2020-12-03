@@ -18,7 +18,12 @@ const Orders: React.FC = () => {
 
   if (loading) return <Loading />;
 
-  if (orders?.length < 0) return <h2>Sem compras...</h2>;
+  if (orders?.length < 0)
+    return (
+      <Container>
+        <Title>Sem compras realizadas</Title>
+      </Container>
+    );
 
   return (
     <Container>

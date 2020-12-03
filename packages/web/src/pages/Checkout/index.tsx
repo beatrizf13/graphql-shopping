@@ -27,6 +27,7 @@ import { useOrder, ICreateOrderItem } from '../../hooks/order';
 import { useAuth } from '../../hooks/auth';
 import getValidationErrors from '../../utils/ getValidationErrors';
 import Alert from '../../components/Alert';
+import { useStock } from '../../hooks/stock';
 
 interface IFormData {
   number: string;
@@ -43,6 +44,7 @@ const Checkout: React.FC = () => {
   const [message, setMessage] = useState('');
   const { costumer } = useAuth();
   const { products, totalValue, totalItens } = useCart();
+  const { updateProducts } = useStock();
   const { createOrder, addOrderToView } = useOrder();
 
   const orderItems: ICreateOrderItem[] = products.map(product => ({
@@ -75,6 +77,7 @@ const Checkout: React.FC = () => {
         });
 
         addOrderToView(order);
+        await updateProducts();
 
         history.push('/compras');
       } catch (err) {

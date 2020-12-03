@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface IProductProps {
+  opacity: boolean;
+}
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -16,7 +20,7 @@ export const ProductList = styled.div`
   gap: 0.5rem;
 `;
 
-export const Product = styled.div`
+export const Product = styled.div<IProductProps>`
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -39,6 +43,8 @@ export const Product = styled.div`
   }
 
   transition: box-shadow 0.4s ease 0s;
+
+  opacity: ${props => (props.opacity ? '0.6' : '1')};
 `;
 
 export const ProductImage = styled.img`
@@ -46,6 +52,7 @@ export const ProductImage = styled.img`
   height: 122px;
   width: 122px;
   object-fit: contain;
+  margin-bottom: 8px;
 `;
 
 export const ProductTitle = styled.h3`
@@ -66,8 +73,13 @@ export const PriceContainer = styled.div`
 
 export const ProductPrice = styled.span`
   font-weight: bold;
-
   color: #0083ca;
+`;
+
+export const ProductQuantity = styled.p`
+  margin-top: 2px;
+  font-size: 12px;
+  color: #a0a0b3;
 `;
 
 export const ProductButton = styled.button`
