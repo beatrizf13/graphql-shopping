@@ -5,11 +5,10 @@ import React, {
   useContext,
   useEffect,
 } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import { QueryLazyOptions, useLazyQuery, useMutation } from '@apollo/client';
 
 import { GET_ORDERS, CREATE_ORDER } from '../graphql/order';
 import { IProduct } from './stock';
-import { useAuth } from './auth';
 
 export interface ICreateOrderItem {
   productId: string;
@@ -40,7 +39,9 @@ interface IOrderContext {
   loading: boolean;
   orders: IOrder[];
   createOrder(data: ICreateOrder): Promise<IOrder>;
-  addOrderToView(order: IOrder): void;
+  getOrders: (
+    options?: QueryLazyOptions<Record<string, any>> | undefined,
+  ) => void;
 }
 
 const OrderContext = createContext<IOrderContext>({} as IOrderContext);
@@ -50,17 +51,15 @@ export const OrderProvider: React.FC = ({ children }) => {
 
   const [createOrderRequest] = useMutation(CREATE_ORDER);
 
-  const { costumer } = useAuth();
-
-  const { loading, data: getOrdersResponse } = useQuery(GET_ORDERS, {
-    variables: { costumerId: costumer?.id },
-  });
+  const [getOrders, { loading, data: getOrdersData, refetch }] = useLazyQuery(
+    GET_ORDERS,
+  );
 
   useEffect(() => {
     if (!loading) {
-      setOrders(getOrdersResponse?.ordersByCostumer);
+      setOrders(getOrdersData?.ordersByCostumer);
     }
-  }, [loading, getOrdersResponse]);
+  }, [getOrders, getOrdersData, loading]);
 
   const createOrder = useCallback(
     async (data: ICreateOrder): Promise<IOrder> => {
@@ -70,23 +69,22 @@ export const OrderProvider: React.FC = ({ children }) => {
 
       localStorage.removeItem('@shopping:cart');
 
+      refetch && (await refetch());
+
       return order;
     },
-    [createOrderRequest],
+    [createOrderRequest, refetch],
   );
-
-  const addOrderToView = useCallback((order: IOrder) => {
-    setOrders(oldOrders => [...oldOrders, order]);
-  }, []);
 
   const value = React.useMemo(
     () => ({
       loading,
       orders,
       createOrder,
-      addOrderToView,
+
+      getOrders,
     }),
-    [createOrder, loading, orders, addOrderToView],
+    [createOrder, getOrders, loading, orders],
   );
 
   return (

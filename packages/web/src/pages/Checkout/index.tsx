@@ -45,7 +45,7 @@ const Checkout: React.FC = () => {
   const { costumer } = useAuth();
   const { products, totalValue, totalItens } = useCart();
   const { updateProducts } = useStock();
-  const { createOrder, addOrderToView } = useOrder();
+  const { createOrder } = useOrder();
 
   const orderItems: ICreateOrderItem[] = products.map(product => ({
     productId: product.id,
@@ -70,13 +70,12 @@ const Checkout: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        const order = await createOrder({
+        await createOrder({
           costumerId: costumer?.id as string,
           creditCard: data.number,
           items: orderItems,
         });
 
-        addOrderToView(order);
         await updateProducts();
 
         history.push('/compras');
@@ -89,14 +88,7 @@ const Checkout: React.FC = () => {
         setMessage('Pagamento negado!');
       }
     },
-    [
-      createOrder,
-      costumer,
-      orderItems,
-      addOrderToView,
-      updateProducts,
-      history,
-    ],
+    [createOrder, costumer, orderItems, updateProducts, history],
   );
 
   if (products.length < 1) {
