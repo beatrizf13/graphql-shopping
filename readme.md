@@ -25,3 +25,9 @@ yarn web dev
 ```
 
 Cliente web: [http://localhost:3000](http://localhost:3000)
+
+#### Para executar os testes:
+
+```bash
+yarn test
+```
