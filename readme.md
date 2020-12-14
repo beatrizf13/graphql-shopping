@@ -31,3 +31,10 @@ Cliente web: [http://localhost:3000](http://localhost:3000)
 ```bash
 yarn test
 ```
+
+
+#### Número do cartão de crédito sempre aceito:
+
+```bash
+1111111111111111
+```
