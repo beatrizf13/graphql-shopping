@@ -10,6 +10,13 @@ Aplicação fullstack que simula um carrinho de compras utilizando GraphQl com A
 yarn
 ```
 
+#### Execute as migrações:
+
+```bash
+yarn typeorm migration:run
+```
+
+
 #### Inicie o servidor:
 
 ```bash
