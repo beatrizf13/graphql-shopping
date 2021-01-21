@@ -43,7 +43,7 @@ const Checkout: React.FC = () => {
 
   const [message, setMessage] = useState('');
   const { costumer } = useAuth();
-  const { products, totalValue, totalItens } = useCart();
+  const { products, totalValue, totalItens, emptyCart } = useCart();
   const { updateProducts } = useStock();
   const { createOrder } = useOrder();
 
@@ -76,6 +76,7 @@ const Checkout: React.FC = () => {
           items: orderItems,
         });
 
+        emptyCart();
         await updateProducts();
 
         history.push('/compras');
@@ -88,7 +89,7 @@ const Checkout: React.FC = () => {
         setMessage('Pagamento negado!');
       }
     },
-    [createOrder, costumer, orderItems, updateProducts, history],
+    [createOrder, costumer, orderItems, emptyCart, updateProducts, history],
   );
 
   if (products.length < 1) {

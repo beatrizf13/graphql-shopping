@@ -13,6 +13,7 @@ interface ICartContext {
   addToCart(product: Omit<IProduct, 'quantity'>): void;
   increment(productId: string): void;
   decrement(productId: string): void;
+  emptyCart(): void;
   totalItens: number;
   totalValue: string;
 }
@@ -35,6 +36,11 @@ const CartProvider: React.FC = ({ children }) => {
   const updateCartOnStorage = useCallback((): void => {
     localStorage.setItem('@shopping:cart', JSON.stringify(products));
   }, [products]);
+
+  const emptyCart = useCallback((): void => {
+    setProducts([]);
+    updateCartOnStorage();
+  }, [updateCartOnStorage]);
 
   const increment = useCallback(
     (productId: string): void => {
@@ -107,6 +113,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   const value = React.useMemo(
     () => ({
+      emptyCart,
       addToCart,
       increment,
       decrement,
@@ -114,7 +121,15 @@ const CartProvider: React.FC = ({ children }) => {
       totalValue,
       totalItens,
     }),
-    [addToCart, increment, decrement, products, totalValue, totalItens],
+    [
+      emptyCart,
+      addToCart,
+      increment,
+      decrement,
+      products,
+      totalValue,
+      totalItens,
+    ],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
