@@ -37,6 +37,7 @@ describe('CreateOrder', () => {
 
     const order = await createOrder.execute({
       costumerId: costumer.id,
+      creditCard: '1111111111111111',
       items: [{ productId: product.id, quantity: 1 }],
     });
 

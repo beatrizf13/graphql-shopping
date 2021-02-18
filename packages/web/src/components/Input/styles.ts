@@ -42,8 +42,6 @@ export const Container = styled.div<ContainerProps>`
       color: #0083ca;
     `}
 
-
-
   input {
     width: 100%;
     background: transparent;
@@ -51,6 +49,10 @@ export const Container = styled.div<ContainerProps>`
 
     &::placeholder {
       color: #666360;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 
